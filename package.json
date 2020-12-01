@@ -1,6 +1,6 @@
 {
   "name": "combo-finder",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Filter ",
   "main": "dist/index.js",
   "scripts": {
@@ -19,6 +19,6 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/ViniDalvino/combo-checker"
   }
 }
