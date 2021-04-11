@@ -1,6 +1,6 @@
 {
   "name": "combo-finder",
-  "version": "1.0.1",
+  "version": "1.5.0",
   "description": "Filter ",
   "main": "dist/index.js",
   "scripts": {
