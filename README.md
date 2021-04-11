@@ -2,7 +2,7 @@
 Find combo in a list of combo
 
 ## Documentation
-### `function findCombo(comboList: string): ComboResult`
+### `function findCombo(comboList: string, checkDupe: boolean = false): ComboResult`
 
 * comboList: the list of combo in a format of username:password
 

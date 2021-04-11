@@ -3,19 +3,18 @@ import isEqual from "lodash.isequal"
 const combo_regex = /(?<email>\w+(@\w+\.\w+)?):(?<password>.+)/gm;
 
 type Combo =
-{
-  /**
-   * The combo username
-   */
-  Username: string;
-  /**
-   * The combo password
-   */
-  Password: string;
-}
+  {
+    /**
+     * The combo username
+     */
+    Username: string;
+    /**
+     * The combo password
+     */
+    Password: string;
+  }
 
-interface ComboResult
-{
+interface ComboResult {
   /**
    * The number of combo found
    */
@@ -32,36 +31,34 @@ interface ComboResult
  * @returns return the interface ComboResult
  * @example const foundCombo = findCombo(fs.readFileSync("combo.txt", { encoding: "utf8" }))
  */
-export function findCombo(comboList: string): ComboResult
-{
+export function findCombo(comboList: string, checkDupe = false): ComboResult {
   let m: RegExpExecArray
   let comboResult: ComboResult = {
     NumberOfCombo: 0,
     ComboArray: []
   }
-  while ((m = combo_regex.exec(comboList)) !== null)
-  {
+  while ((m = combo_regex.exec(comboList)) !== null) {
     // This is necessary to avoid infinite loops with zero-width matches
-    if (m.index === combo_regex.lastIndex)
-    {
+    if (m.index === combo_regex.lastIndex) {
       combo_regex.lastIndex++;
     }
 
     // The result can be accessed through the `m`-variable.
-    m.forEach((match: string) => 
-    {
+    m.forEach((match: string) => {
       const combo: Combo = {
         Username: m.groups.email,
         Password: m.groups.password
       };
 
-      // Check if the the combo is a dupe
-      for (const comboOfComboResult of comboResult.ComboArray)
-      {
-        if (isEqual(combo, comboOfComboResult))
+      if (checkDupe) {
+
+        // Check if the the combo is a dupe
+        for (const comboOfComboResult of comboResult.ComboArray) {
+          if (isEqual(combo, comboOfComboResult))
           return;
+        }
       }
-      
+
       comboResult.NumberOfCombo++;
       comboResult.ComboArray.push(combo);
     });
